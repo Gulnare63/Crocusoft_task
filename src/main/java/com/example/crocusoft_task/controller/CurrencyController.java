@@ -18,11 +18,21 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
-    @GetMapping("/{date}")
+    @GetMapping("/{rates}")
     public Map<CurrencyCode, BigDecimal> getRates(
             @PathVariable String date,
             @RequestParam List<CurrencyCode> codes
     ) {
         return currencyService.getRatesByEnum(date, codes);
+    }
+
+    @GetMapping("/convert")
+    public BigDecimal convertCurrency(
+            @RequestParam String date,
+            @RequestParam CurrencyCode code,
+            @RequestParam BigDecimal amount
+    ) {
+        BigDecimal rate = currencyService.getRateByEnum(date, code);
+        return rate.multiply(amount);
     }
 }

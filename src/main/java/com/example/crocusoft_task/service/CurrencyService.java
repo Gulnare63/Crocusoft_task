@@ -9,4 +9,6 @@ import java.util.Map;
 public interface CurrencyService {
 
     Map<CurrencyCode, BigDecimal> getRatesByEnum(String date, List<CurrencyCode> codes);
+
+    BigDecimal getRateByEnum(String date, CurrencyCode code);
 }

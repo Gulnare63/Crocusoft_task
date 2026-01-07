@@ -54,12 +54,16 @@ public class CurrencyServiceImpl implements CurrencyService {
                         }
                     });
 
-
             return rates;
 
         } catch (RestClientException e) {
 
             throw new ApiException("CBAR API call failed: " + e.getMessage());
         }
+    }
+
+    @Override
+    public BigDecimal getRateByEnum(String date, CurrencyCode code) {
+        return getRatesByEnum(date, List.of(code)).get(code);
     }
 }
